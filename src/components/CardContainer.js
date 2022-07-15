@@ -1,20 +1,20 @@
 import { Stack } from "@mui/material";
+import BurgarCards from "./BurgarCards";
 import Filter from "./Filter";
-import ShoppingCards from "./ShoppingCards";
 
 const CardContainer = () => {
   return (
     <Stack
       sx={{
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: { md: "flex-start", xs: "center" },
         justifyContent: "center",
         flexDirection: { md: "row", xs: "column" },
         gap: 2,
       }}
     >
       <Filter />
-      <ShoppingCards />
+      <BurgarCards />
     </Stack>
   );
 };

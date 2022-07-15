@@ -11,7 +11,7 @@ import {
 import React from "react";
 import burgarDetails from "../constant/BurgarApi";
 
-const ShoppingCards = () => {
+const BurgarCards = () => {
   return (
     <Box
       sx={{
@@ -30,7 +30,7 @@ const ShoppingCards = () => {
               component="img"
               height="180"
               image={burgarImg}
-              alt="green iguana"
+              alt={burgarName}
             />
             <CardContent>
               <Typography variant="h5" component="div">
@@ -60,4 +60,4 @@ const ShoppingCards = () => {
   );
 };
 
-export default ShoppingCards;
+export default BurgarCards;

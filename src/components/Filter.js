@@ -16,7 +16,7 @@ const Filter = () => {
   return (
     <Box
       sx={{
-        maxWidth: "360px",
+        maxWidth: { md: "360px", xs: "100%" },
         height: "fit-content",
         width: "100%",
         bgcolor: "whitesmoke",
