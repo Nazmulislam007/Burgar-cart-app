@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import burgarDetails from "../constant/BurgarApi";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Link } from "react-router-dom";
 
 const MenuNav = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,7 +29,6 @@ const MenuNav = () => {
         aria-controls={open ? "fade-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-        sx={{ ml: "auto" }}
         onClick={handleOpen}
         color="inherit"
       >
@@ -56,7 +56,8 @@ const MenuNav = () => {
                 width="100%"
                 spacing={1}
               >
-                <div
+                <Link
+                  to="/burgers-cart"
                   style={{ display: "flex", alignItems: "center", gap: "10px" }}
                 >
                   <img width="120" src={burgarImg} alt={burgarName} />
@@ -75,7 +76,7 @@ const MenuNav = () => {
                       {delivaryTime} hours delivery
                     </Typography>
                   </div>
-                </div>
+                </Link>
 
                 <div>
                   <DeleteIcon color="error" className="error-btn" />

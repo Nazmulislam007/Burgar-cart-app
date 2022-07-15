@@ -20,7 +20,13 @@ const Navbar = () => {
         >
           <Link to="/"> Burger Cart</Link>
         </Typography>
-        <MenuNav />
+        <div style={{ marginLeft: "auto" }}>
+          <Link to="/burgers">Burgers</Link>
+          <Link style={{ marginLeft: "1rem" }} to="/burgers-cart">
+            Cart
+          </Link>
+          <MenuNav />
+        </div>
       </Toolbar>
     </Box>
   );

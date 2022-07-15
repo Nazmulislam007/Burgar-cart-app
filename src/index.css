@@ -8,3 +8,19 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.count {
+  padding: 0 0.5rem;
+}
+
+.card__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 10px;
+}
+
+@media screen and (min-width: 900px) {
+  .card__container {
+    grid-template-columns: repeat(auto-fit, minmax(345px, 1fr));
+  }
+}

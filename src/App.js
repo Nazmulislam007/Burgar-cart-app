@@ -1,5 +1,5 @@
 import { Container, CssBaseline } from "@mui/material";
-import { Burgars, Home } from "./pages";
+import { Burgars, Cart, Home } from "./pages";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" index element={<Home />} />
         <Route path="/burgers" element={<Burgars />} />
-        <Route path="/burgers" element={<Burgars />} />
+        <Route path="/burgers-cart" element={<Cart />} />
       </Routes>
     </Container>
   );
