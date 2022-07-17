@@ -36,9 +36,16 @@ const ProductContext = ({ children }) => {
     });
   };
 
+  const removeCartPorduct = (id) => {
+    return dispatch({
+      type: "REMOVE_CART_PRODUCT",
+      payload: id,
+    });
+  };
+
   return (
     <createCartContext.Provider
-      value={{ ...state, incriment, decriment, addToCart }}
+      value={{ ...state, incriment, decriment, addToCart, removeCartPorduct }}
     >
       {children}
     </createCartContext.Provider>

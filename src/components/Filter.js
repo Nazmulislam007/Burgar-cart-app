@@ -9,10 +9,9 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { useCart } from "../context/ProductContext";
+// import { useCart } from "../context/ProductContext";
 
 const Filter = () => {
-  const {} = useCart();
   const [value, setValue] = useState(0);
   const [sortValue, setSortValue] = useState("");
   const label1 = { inputProps: { "aria-label": "checkbox-demo" } };

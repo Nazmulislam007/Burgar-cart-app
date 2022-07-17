@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/ProductContext";
 
 const MenuNav = () => {
-  const { totalProducts, cart } = useCart();
+  const { totalProducts, removeCartPorduct, cart } = useCart();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleOpen = (e) => {
@@ -78,7 +78,11 @@ const MenuNav = () => {
               </Link>
 
               <div>
-                <DeleteIcon color="error" className="error-btn" />
+                <DeleteIcon
+                  onClick={() => removeCartPorduct(id)}
+                  color="error"
+                  className="error-btn"
+                />
               </div>
             </Stack>
           </MenuItem>

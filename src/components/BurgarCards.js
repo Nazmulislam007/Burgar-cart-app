@@ -14,7 +14,7 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import { useCart } from "../context/ProductContext";
 
 const BurgarCards = () => {
-  const { products, addToCart } = useCart();
+  const { products, removeCartPorduct, addToCart, cart } = useCart();
   return (
     <Box
       sx={{
@@ -48,13 +48,24 @@ const BurgarCards = () => {
                 </Typography>
                 <Rating precision={0.5} defaultValue={prod.rating} readOnly />
                 <CardActions sx={{ p: 0, pt: 1 }}>
-                  <Button
-                    size="medium"
-                    onClick={() => addToCart(prod)}
-                    variant="contained"
-                  >
-                    ADD TO CART
-                  </Button>
+                  {cart.some((cart) => cart.id === prod.id) ? (
+                    <Button
+                      size="medium"
+                      variant="contained"
+                      onClick={() => removeCartPorduct(prod.id)}
+                      color="error"
+                    >
+                      REMOVE TO CART
+                    </Button>
+                  ) : (
+                    <Button
+                      size="medium"
+                      onClick={() => addToCart(prod)}
+                      variant="contained"
+                    >
+                      ADD TO CART
+                    </Button>
+                  )}
                 </CardActions>
               </CardContent>
             </Card>

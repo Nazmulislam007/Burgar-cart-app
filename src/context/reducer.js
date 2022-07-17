@@ -23,6 +23,14 @@ export const reducer = (state, { type, payload }) => {
 
     case "ADD_TO_CART":
       return { ...state, cart: [...state.cart, { ...payload, qty: 1 }] };
+
+    case "REMOVE_CART_PRODUCT":
+      return {
+        ...state,
+        cart: state.cart.filter((cart) => {
+          return cart.id !== payload;
+        }),
+      };
     default:
       return state;
   }
