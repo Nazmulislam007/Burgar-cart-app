@@ -4,10 +4,11 @@ import { Navbar } from "../components";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
-import burgarDetails from "../constant/BurgarApi";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { useCart } from "../context/ProductContext";
 
 const Cart = () => {
+  const { incriment, totalAmounts, decriment, cart } = useCart();
   return (
     <Stack spacing={2}>
       <Navbar />
@@ -21,9 +22,8 @@ const Cart = () => {
       >
         <Scrollbars>
           <Stack direction="column" spacing={1}>
-            {burgarDetails
-              .slice(0, 5)
-              .map(({ id, burgarName, burgarImg, price, delivaryTime }) => (
+            {cart.map(
+              ({ id, burgarName, burgarImg, qty, price, delivaryTime }) => (
                 <Card key={id}>
                   <Stack
                     direction={{ sm: "row", xs: "column" }}
@@ -57,15 +57,17 @@ const Cart = () => {
                           minWidth: "35px",
                         }}
                         color="inherit"
+                        onClick={() => decriment(id)}
                       >
                         <RemoveIcon />
                       </Button>
-                      <div className="count">1</div>
+                      <div className="count">{qty}</div>
                       <Button
                         sx={{
                           minWidth: "35px",
                         }}
                         color="inherit"
+                        onClick={() => incriment(id)}
                       >
                         <AddIcon />
                       </Button>
@@ -79,7 +81,8 @@ const Cart = () => {
                     />
                   </Stack>
                 </Card>
-              ))}
+              )
+            )}
           </Stack>
         </Scrollbars>
       </Box>
@@ -89,7 +92,7 @@ const Cart = () => {
         alignItems="flex-start"
         spacing={2}
       >
-        <Typography>Total Price : ৳ 12000</Typography>
+        <Typography>Total Price : ৳ {totalAmounts}</Typography>
         <Stack spacing={2}>
           <Button variant="contained" color="error">
             Clear All

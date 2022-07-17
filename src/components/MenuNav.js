@@ -8,11 +8,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import burgarDetails from "../constant/BurgarApi";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/ProductContext";
 
 const MenuNav = () => {
+  const { totalProducts, cart } = useCart();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleOpen = (e) => {
@@ -32,7 +33,7 @@ const MenuNav = () => {
         onClick={handleOpen}
         color="inherit"
       >
-        <Badge badgeContent={4} color="error">
+        <Badge badgeContent={totalProducts} color="error">
           <ShoppingCartIcon />
         </Badge>
       </Button>
@@ -45,45 +46,43 @@ const MenuNav = () => {
         open={open}
         anchorEl={anchorEl}
       >
-        {burgarDetails
-          .slice(0, 2)
-          .map(({ burgarImg, id, burgarName, price, delivaryTime }) => (
-            <MenuItem key={id} onClick={handleClose}>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                width="100%"
-                spacing={1}
+        {cart.map(({ burgarImg, id, burgarName, price, delivaryTime }) => (
+          <MenuItem key={id} onClick={handleClose}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              width="100%"
+              spacing={1}
+            >
+              <Link
+                to="/burgers-cart"
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
               >
-                <Link
-                  to="/burgers-cart"
-                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
-                >
-                  <img width="120" src={burgarImg} alt={burgarName} />
-                  <div>
-                    <Typography variant="h6" component="div">
-                      {burgarName}
-                    </Typography>
-                    <Typography variant="subtitle2" color="GrayText">
-                      ৳ {price}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      gutterBottom
-                      color="text.secondary"
-                    >
-                      {delivaryTime} hours delivery
-                    </Typography>
-                  </div>
-                </Link>
-
+                <img width="120" src={burgarImg} alt={burgarName} />
                 <div>
-                  <DeleteIcon color="error" className="error-btn" />
+                  <Typography variant="h6" component="div">
+                    {burgarName}
+                  </Typography>
+                  <Typography variant="subtitle2" color="GrayText">
+                    ৳ {price}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    gutterBottom
+                    color="text.secondary"
+                  >
+                    {delivaryTime} hours delivery
+                  </Typography>
                 </div>
-              </Stack>
-            </MenuItem>
-          ))}
+              </Link>
+
+              <div>
+                <DeleteIcon color="error" className="error-btn" />
+              </div>
+            </Stack>
+          </MenuItem>
+        ))}
       </Menu>
     </>
   );

@@ -7,12 +7,16 @@ import {
   Box,
   Rating,
   Typography,
+  Button,
 } from "@mui/material";
+import { useCart } from "../context/ProductContext";
 
 const Filter = () => {
+  const {} = useCart();
   const [value, setValue] = useState(0);
-  const [currentValue, setCurrentValue] = useState("Ascending");
+  const [sortValue, setSortValue] = useState("");
   const label1 = { inputProps: { "aria-label": "checkbox-demo" } };
+
   return (
     <Box
       sx={{
@@ -26,40 +30,64 @@ const Filter = () => {
         pb: 3,
       }}
     >
-      {["Ascending", "Descending"].map((asdec) => (
-        <List
-          key={asdec}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
-            gap: "10px",
-          }}
-        >
-          <Radio
-            inputProps={{ "aria-label": asdec }}
-            name="radio-button"
-            value={asdec}
-            checked={currentValue === asdec}
-            onChange={(e) => setCurrentValue(e.target.value)}
-          />
-          <ListItemText primary={asdec} />
-        </List>
-      ))}
-      {["Include Out of Stock", "Fast Delivery Only"].map((asdec) => (
-        <List
-          key={asdec}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
-            gap: "10px",
-          }}
-        >
-          <Checkbox {...label1} />
-          <ListItemText primary={asdec} />
-        </List>
-      ))}
+      <List
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "row",
+          gap: "10px",
+        }}
+      >
+        <Radio
+          inputProps={{ "aria-label": "Ascending" }}
+          name="radio-button"
+          value="Ascending"
+          checked={sortValue === "Ascending"}
+          onChange={() => setSortValue("Ascending")}
+        />
+        <ListItemText primary="Ascending" />
+      </List>
+      <List
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "row",
+          gap: "10px",
+        }}
+      >
+        <Radio
+          inputProps={{ "aria-label": "Descending" }}
+          name="radio-button"
+          value="Descending"
+          checked={sortValue === "Descending"}
+          onChange={() => setSortValue("Descending")}
+        />
+        <ListItemText primary="Descending" />
+      </List>
+
+      <List
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "row",
+          gap: "10px",
+        }}
+      >
+        <Checkbox {...label1} />
+        <ListItemText primary="Include Out of Stock" />
+      </List>
+      <List
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "row",
+          gap: "10px",
+        }}
+      >
+        <Checkbox {...label1} />
+        <ListItemText primary="Fast Delivery Only" />
+      </List>
+
       <List
         sx={{
           display: "flex",
@@ -78,6 +106,9 @@ const Filter = () => {
           }}
         />
       </List>
+      <Button variant="contained" sx={{ mt: 1, ml: 1 }}>
+        Clear Filter
+      </Button>
     </Box>
   );
 };
