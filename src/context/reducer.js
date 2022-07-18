@@ -5,20 +5,28 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         cart: state.cart.map((prod) => {
           if (prod.id === payload) {
-            return { ...prod, qty: prod.qty + 1 };
+            return {
+              ...prod,
+              qty: prod.qty + 1,
+            };
           }
           return prod;
         }),
       };
+
     case "DECRIMENT":
       return {
         ...state,
-        cart: state.cart.map((prod) => {
-          if (prod.id === payload) {
-            return { ...prod, qty: prod.qty - 1 };
-          }
-          return prod;
-        }),
+        cart: state.cart
+          .map((prod) => {
+            if (prod.id === payload) {
+              return { ...prod, qty: prod.qty - 1 };
+            }
+            return prod;
+          })
+          .filter((prod) => {
+            return prod.qty !== 0;
+          }),
       };
 
     case "ADD_TO_CART":
@@ -31,6 +39,24 @@ export const reducer = (state, { type, payload }) => {
           return cart.id !== payload;
         }),
       };
+
+    case "REMOVE_CART":
+      return { ...state, cart: [] };
+
+    case "TOTAL":
+      let { totalAmounts, totalProducts } = state.cart.reduce(
+        (prev, curnt) => {
+          let { qty, price } = curnt;
+          let updateAmounts = qty * price;
+          prev.totalAmounts += updateAmounts;
+
+          prev.totalProducts += qty;
+          return prev;
+        },
+        { totalAmounts: 0, totalProducts: 0 }
+      );
+      return { ...state, totalAmounts, totalProducts };
+
     default:
       return state;
   }

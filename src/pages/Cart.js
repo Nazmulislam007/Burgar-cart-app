@@ -8,8 +8,15 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import { useCart } from "../context/ProductContext";
 
 const Cart = () => {
-  const { incriment, totalAmounts, removeCartPorduct, decriment, cart } =
-    useCart();
+  const {
+    incriment,
+    totalAmounts,
+    removeCartPorduct,
+    removeCart,
+    decriment,
+    cart,
+  } = useCart();
+
   return (
     <Stack spacing={2}>
       <Navbar />
@@ -100,7 +107,11 @@ const Cart = () => {
       >
         <Typography>Total Price : ৳ {totalAmounts}</Typography>
         <Stack spacing={2}>
-          <Button variant="contained" color="error">
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => removeCart()}
+          >
             Clear All
           </Button>
           <Button variant="contained" color="success">

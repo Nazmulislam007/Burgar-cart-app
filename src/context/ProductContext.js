@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 import burgarDetails from "../constant/BurgarApi";
 import { reducer } from "./reducer";
 
@@ -15,6 +15,7 @@ const ProductContext = ({ children }) => {
     totalAmounts: 0,
     totalProducts: 0,
   });
+
   const incriment = (id) => {
     return dispatch({
       type: "INCRIMENT",
@@ -43,9 +44,28 @@ const ProductContext = ({ children }) => {
     });
   };
 
+  const removeCart = () => {
+    return dispatch({
+      type: "REMOVE_CART",
+    });
+  };
+
+  useEffect(() => {
+    return dispatch({
+      type: "TOTAL",
+    });
+  }, [state.cart]);
+
   return (
     <createCartContext.Provider
-      value={{ ...state, incriment, decriment, addToCart, removeCartPorduct }}
+      value={{
+        ...state,
+        incriment,
+        decriment,
+        addToCart,
+        removeCartPorduct,
+        removeCart,
+      }}
     >
       {children}
     </createCartContext.Provider>
