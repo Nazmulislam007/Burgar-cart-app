@@ -12,11 +12,11 @@ import {
 import { useCart } from "../context/ProductContext";
 
 const Filter = () => {
-  const { sortdispatch } = useCart();
-  const [value, setValue] = useState(0);
-  const [sortValue, setSortValue] = useState("");
+  const { byRating, sortByPrice, byFastDelivery, sortdispatch } = useCart();
+  const [value, setValue] = useState(byRating);
+  const [sortValue, setSortValue] = useState(sortByPrice);
   const label1 = { inputProps: { "aria-label": "checkbox-demo" } };
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(byFastDelivery);
 
   const sortAscenFun = () => {
     sortdispatch({
@@ -48,6 +48,15 @@ const Filter = () => {
       payload: newValue,
     });
     setValue(newValue);
+  };
+
+  const clearAllFilter = () => {
+    sortdispatch({
+      type: "CLEAR_FILTER",
+    });
+    setValue(0);
+    setCheck(false);
+    setSortValue("");
   };
 
   return (
@@ -126,7 +135,11 @@ const Filter = () => {
           onChange={(_, newValue) => ratingValue(newValue)}
         />
       </List>
-      <Button variant="contained" sx={{ mt: 1, ml: 1 }}>
+      <Button
+        onClick={clearAllFilter}
+        variant="contained"
+        sx={{ mt: 1, ml: 1 }}
+      >
         Clear Filter
       </Button>
     </Box>

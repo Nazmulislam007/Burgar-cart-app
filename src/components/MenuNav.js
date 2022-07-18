@@ -15,7 +15,12 @@ import { useCart } from "../context/ProductContext";
 const MenuNav = () => {
   const { totalProducts, removeCartPorduct, cart } = useCart();
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  let open = Boolean(anchorEl);
+
+  if (cart.length === 0) {
+    open = false;
+  }
+
   const handleOpen = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -46,7 +51,7 @@ const MenuNav = () => {
         open={open}
         anchorEl={anchorEl}
       >
-        {cart.map(({ burgarImg, id, burgarName, price, delivaryTime }) => (
+        {cart?.map(({ burgarImg, id, burgarName, price, delivaryTime }) => (
           <MenuItem key={id} onClick={handleClose}>
             <Stack
               direction="row"

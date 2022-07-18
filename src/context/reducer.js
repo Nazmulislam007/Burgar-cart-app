@@ -70,6 +70,8 @@ export const sortReducer = (sorted, { type, payload }) => {
       return { ...sorted, byFastDelivery: !payload };
     case "SORT_BY_RATING":
       return { ...sorted, byRating: payload };
+    case "CLEAR_FILTER":
+      return { sortByPrice: "", byRating: 0, byFastDelivery: false };
     default:
       return sorted;
   }
