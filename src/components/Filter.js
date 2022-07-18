@@ -42,6 +42,14 @@ const Filter = () => {
     });
   };
 
+  const ratingValue = (newValue) => {
+    sortdispatch({
+      type: "SORT_BY_RATING",
+      payload: newValue,
+    });
+    setValue(newValue);
+  };
+
   return (
     <Box
       sx={{
@@ -115,9 +123,7 @@ const Filter = () => {
         <Rating
           name="simple-controlled"
           value={value}
-          onChange={(_, newValue) => {
-            setValue(newValue);
-          }}
+          onChange={(_, newValue) => ratingValue(newValue)}
         />
       </List>
       <Button variant="contained" sx={{ mt: 1, ml: 1 }}>

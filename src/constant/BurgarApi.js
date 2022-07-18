@@ -37,7 +37,7 @@ const burgarDetails = [
     burgarImg: "https://source.unsplash.com/8l8Yl2ruUsg",
     price: 800,
     delivaryTime: 2,
-    rating: 4,
+    rating: 2,
   },
   {
     id: 6,
@@ -61,7 +61,7 @@ const burgarDetails = [
     burgarImg: "https://source.unsplash.com/88YAXjnpvrM",
     price: 700,
     delivaryTime: 3,
-    rating: 4,
+    rating: 1,
   },
   {
     id: 9,

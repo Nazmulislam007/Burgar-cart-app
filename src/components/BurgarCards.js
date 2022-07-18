@@ -20,6 +20,7 @@ const BurgarCards = () => {
     removeCartPorduct,
     addToCart,
     cart,
+    byRating,
   } = useCart();
 
   const sortedProducts = () => {
@@ -38,6 +39,13 @@ const BurgarCards = () => {
         return prod.delivaryTime === "Fast";
       });
     }
+
+    if (byRating) {
+      sortProducts = sortProducts.filter((prod) => {
+        return prod.rating >= byRating;
+      });
+    }
+
     return sortProducts;
   };
 
