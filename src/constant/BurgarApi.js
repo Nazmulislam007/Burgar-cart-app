@@ -20,7 +20,7 @@ const burgarDetails = [
     burgarName: "The IceBurg.",
     burgarImg: "https://source.unsplash.com/CK6tjAIMJWM",
     price: 500,
-    delivaryTime: 5,
+    delivaryTime: "Fast",
     rating: 3.5,
   },
   {
@@ -52,7 +52,7 @@ const burgarDetails = [
     burgarName: "Burger Buzz.",
     burgarImg: "https://source.unsplash.com/OvNsLemoVEw",
     price: 200,
-    delivaryTime: 3,
+    delivaryTime: "Fast",
     rating: 3,
   },
   {
@@ -76,7 +76,7 @@ const burgarDetails = [
     burgarName: "Steak 'N Shake Double 'N Cheese Steakburger Steak N Shake.",
     burgarImg: "https://source.unsplash.com/LV2p9Utbkbw",
     price: 500,
-    delivaryTime: 4,
+    delivaryTime: "Fast",
     rating: 5,
   },
 ];

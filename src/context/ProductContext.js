@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import burgarDetails from "../constant/BurgarApi";
-import { reducer } from "./reducer";
+import { reducer, sortReducer } from "./reducer";
 
 const createCartContext = createContext();
 
@@ -14,6 +14,12 @@ const ProductContext = ({ children }) => {
     cart: [],
     totalAmounts: 0,
     totalProducts: 0,
+  });
+
+  const [sorted, sortdispatch] = useReducer(sortReducer, {
+    sortByPrice: "",
+    byRating: 0,
+    byFastDelivery: false,
   });
 
   const incriment = (id) => {
@@ -60,11 +66,13 @@ const ProductContext = ({ children }) => {
     <createCartContext.Provider
       value={{
         ...state,
+        ...sorted,
         incriment,
         decriment,
         addToCart,
         removeCartPorduct,
         removeCart,
+        sortdispatch,
       }}
     >
       {children}

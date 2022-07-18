@@ -10,11 +10,37 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
-// import burgarDetails from "../constant/BurgarApi";
 import { useCart } from "../context/ProductContext";
 
 const BurgarCards = () => {
-  const { products, removeCartPorduct, addToCart, cart } = useCart();
+  const {
+    products,
+    byFastDelivery,
+    sortByPrice,
+    removeCartPorduct,
+    addToCart,
+    cart,
+  } = useCart();
+
+  const sortedProducts = () => {
+    let sortProducts = products;
+
+    if (sortByPrice) {
+      sortProducts = sortProducts.sort((a, b) => {
+        return sortByPrice === "Ascending"
+          ? a.price - b.price
+          : b.price - a.price;
+      });
+    }
+
+    if (byFastDelivery) {
+      sortProducts = sortProducts.filter((prod) => {
+        return prod.delivaryTime === "Fast";
+      });
+    }
+    return sortProducts;
+  };
+
   return (
     <Box
       sx={{
@@ -24,7 +50,7 @@ const BurgarCards = () => {
     >
       <Scrollbars>
         <div className="card__container">
-          {products.map((prod) => (
+          {sortedProducts().map((prod) => (
             <Card key={prod.id} sx={{ height: "max-content" }}>
               <CardMedia
                 component="img"

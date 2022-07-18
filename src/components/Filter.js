@@ -9,12 +9,38 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-// import { useCart } from "../context/ProductContext";
+import { useCart } from "../context/ProductContext";
 
 const Filter = () => {
+  const { sortdispatch } = useCart();
   const [value, setValue] = useState(0);
   const [sortValue, setSortValue] = useState("");
   const label1 = { inputProps: { "aria-label": "checkbox-demo" } };
+  const [check, setCheck] = useState(false);
+
+  const sortAscenFun = () => {
+    sortdispatch({
+      type: "SORT_BY_PRICE",
+      payload: "Ascending",
+    });
+    setSortValue("Ascending");
+  };
+
+  const sortDescenFun = () => {
+    sortdispatch({
+      type: "SORT_BY_PRICE",
+      payload: "Descending",
+    });
+    setSortValue("Descending");
+  };
+
+  const checkBoxChange = () => {
+    check ? setCheck(false) : setCheck(true);
+    sortdispatch({
+      type: "FAST_DELIVERY",
+      payload: check,
+    });
+  };
 
   return (
     <Box
@@ -42,7 +68,7 @@ const Filter = () => {
           name="radio-button"
           value="Ascending"
           checked={sortValue === "Ascending"}
-          onChange={() => setSortValue("Ascending")}
+          onChange={sortAscenFun}
         />
         <ListItemText primary="Ascending" />
       </List>
@@ -59,7 +85,7 @@ const Filter = () => {
           name="radio-button"
           value="Descending"
           checked={sortValue === "Descending"}
-          onChange={() => setSortValue("Descending")}
+          onChange={sortDescenFun}
         />
         <ListItemText primary="Descending" />
       </List>
@@ -72,18 +98,7 @@ const Filter = () => {
           gap: "10px",
         }}
       >
-        <Checkbox {...label1} />
-        <ListItemText primary="Include Out of Stock" />
-      </List>
-      <List
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "row",
-          gap: "10px",
-        }}
-      >
-        <Checkbox {...label1} />
+        <Checkbox checked={check} onChange={checkBoxChange} {...label1} />
         <ListItemText primary="Fast Delivery Only" />
       </List>
 

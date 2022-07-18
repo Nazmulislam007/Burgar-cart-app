@@ -61,3 +61,14 @@ export const reducer = (state, { type, payload }) => {
       return state;
   }
 };
+
+export const sortReducer = (sorted, { type, payload }) => {
+  switch (type) {
+    case "SORT_BY_PRICE":
+      return { ...sorted, sortByPrice: payload };
+    case "FAST_DELIVERY":
+      return { ...sorted, byFastDelivery: !payload };
+    default:
+      return sorted;
+  }
+};
